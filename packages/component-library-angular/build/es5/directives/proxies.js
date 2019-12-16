@@ -12,24 +12,24 @@ import { fromEvent } from 'rxjs';
  * @return {?}
  */
 function proxyInputs(Cmp, inputs) {
-    /** @type {?} */
-    var Prototype = Cmp.prototype;
-    inputs.forEach((/**
+  /** @type {?} */
+  var Prototype = Cmp.prototype;
+  inputs.forEach((/**
      * @param {?} item
      * @return {?}
      */
     function (item) {
-        Object.defineProperty(Prototype, item, {
-            get: /**
+      Object.defineProperty(Prototype, item, {
+        get: /**
              * @return {?}
              */
-            function () { return this.el[item]; },
-            set: /**
+          function () { return this.el[item]; },
+        set: /**
              * @param {?} val
              * @return {?}
              */
-            function (val) { this.el[item] = val; },
-        });
+          function (val) { this.el[item] = val; },
+      });
     }));
 }
 /**
@@ -38,20 +38,20 @@ function proxyInputs(Cmp, inputs) {
  * @return {?}
  */
 function proxyMethods(Cmp, methods) {
-    /** @type {?} */
-    var Prototype = Cmp.prototype;
-    methods.forEach((/**
+  /** @type {?} */
+  var Prototype = Cmp.prototype;
+  methods.forEach((/**
      * @param {?} methodName
      * @return {?}
      */
     function (methodName) {
-        Prototype[methodName] = (/**
+      Prototype[methodName] = (/**
          * @return {?}
          */
         function () {
-            /** @type {?} */
-            var args = arguments;
-            return this.el.componentOnReady().then((/**
+          /** @type {?} */
+          var args = arguments;
+          return this.el.componentOnReady().then((/**
              * @param {?} el
              * @return {?}
              */
@@ -66,36 +66,38 @@ function proxyMethods(Cmp, methods) {
  * @return {?}
  */
 function proxyOutputs(instance, el, events) {
-    events.forEach((/**
+  events.forEach((/**
      * @param {?} eventName
      * @return {?}
      */
     function (eventName) { return instance[eventName] = fromEvent(el, eventName); }));
 }
 var DemoComponent = /** @class */ (function () {
-    function DemoComponent(c, r) {
-        c.detach();
-        this.el = r.nativeElement;
-        proxyOutputs(this, this.el, ['slideChanged']);
-    }
-    DemoComponent.decorators = [
-        { type: Component, args: [{ selector: 'demo-component', changeDetection: 0, template: '<ng-content></ng-content>', inputs: ['max', 'min', 'value'] },] },
+  function DemoComponent(c, r) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['slideChanged']);
+  }
+  DemoComponent.decorators = [
+    { type: Component, args: [{ selector: 'demo-component', changeDetection: 0, template: '<ng-content></ng-content>', inputs: ['advanced', 'max', 'min', 'value'] },] },
+  ];
+  /** @nocollapse */
+  DemoComponent.ctorParameters = function () {
+    return [
+      { type: ChangeDetectorRef },
+      { type: ElementRef }
     ];
-    /** @nocollapse */
-    DemoComponent.ctorParameters = function () { return [
-        { type: ChangeDetectorRef },
-        { type: ElementRef }
-    ]; };
-    return DemoComponent;
+  };
+  return DemoComponent;
 }());
 export { DemoComponent };
 if (false) {
-    /** @type {?} */
-    DemoComponent.prototype.slideChanged;
-    /**
-     * @type {?}
-     * @protected
-     */
-    DemoComponent.prototype.el;
+  /** @type {?} */
+  DemoComponent.prototype.slideChanged;
+  /**
+   * @type {?}
+   * @protected
+   */
+  DemoComponent.prototype.el;
 }
-proxyInputs(DemoComponent, ['max', 'min', 'value']);
+proxyInputs(DemoComponent, ['advanced', 'max', 'min', 'value']);

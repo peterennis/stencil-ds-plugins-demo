@@ -20,10 +20,10 @@
   "dependencies": {},
   "devDependencies": {
     "@stencil/angular-output-target": "0.0.1",
-    "@stencil/react-output-target": "0.0.1",
-    "@stencil/core": "^1.1.0",
-    "@stencil/sass": "^0.2.1",
-    "@types/node": "^11.11.8"
+    "@stencil/react-output-target": "0.0.2",
+    "@stencil/core": "^1.8.1",
+    "@stencil/sass": "^1.1.1",
+    "@types/node": "^12.12.18"
   },
   "license": "MIT"
 }
